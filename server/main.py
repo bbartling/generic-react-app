@@ -10,12 +10,13 @@ import hashlib
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
-# Hardcoded admin credentials for simplicity
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "password"
-USERS = {ADMIN_USERNAME: hashlib.sha256(ADMIN_PASSWORD.encode()).hexdigest()}
+# Read admin credentials and JWT secret key from environment variables
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "password")
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your_jwt_secret_key")
 
-JWT_SECRET_KEY = "your_jwt_secret_key"  # Replace with a secure random key
+# Hash the admin password
+USERS = {ADMIN_USERNAME: hashlib.sha256(ADMIN_PASSWORD.encode()).hexdigest()}
 
 async def login(request):
     data = await request.json()
@@ -36,6 +37,7 @@ async def login(request):
     else:
         logging.debug(f"Login failed: {username}")
         return web.json_response({"status": "failure", "message": "Invalid credentials"}, status=401)
+
 
 async def create_user(request):
     auth_header = request.headers.get("Authorization")

@@ -3,7 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-Caddy
+/caddy
+
+/certs
 
 # C extensions
 *.so

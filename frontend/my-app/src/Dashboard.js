@@ -45,7 +45,7 @@ const Dashboard = () => {
 
     return (
         <div className="container">
-            <h2>Dashboard</h2>
+            <h2>Super Secret Dashboard</h2>
             {message && <p className="result">{message}</p>}
             {!message && data.financials && (
                 <div>

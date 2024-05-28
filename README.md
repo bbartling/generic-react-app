@@ -15,24 +15,17 @@ source venv/bin/activate
 pip install aiohttp aiohttp-cors pyjwt cryptography
 ```
 
-3. Run py side server:
+3. Optional you can test the py side server that is runs okay:
 ```bash
 python main.py
 ```
 
 ## Getting front end side settup
 
-1. cd into react project
+Run this bash script that builds the react app for production:
+
 ```bash
-cd ../frontend/my-app
-```
-2. Install the required packages:
-```bash
-npm install
-```
-3. Build the React app for production:
-```bash
-npm run build
+build_react.sh
 ```
 
 ## Set Up Caddy for Proxy Management
@@ -45,10 +38,10 @@ sudo apt update
 sudo apt install caddy
 ```
 
-2. Generate Self-Signed Certificates
+2. Generate Self-Signed Certificates from inside root of the project directory
 ```bash
-mkdir -p /etc/caddy/certs
-cd /etc/caddy/certs
+mkdir -p cert
+cd certs
 
 # Generate a private key
 openssl genrsa -out selfsigned.key 2048
@@ -62,50 +55,59 @@ openssl x509 -req -days 365 -in selfsigned.csr -signkey selfsigned.key -out self
 When prompted for information during the CSR generation, you can fill it in or leave it blank. For Common Name (CN), use `localhost` if you're setting this up for local development.
 
 
-3. Edit the Caddyfile
+3. Make and Edit the Caddyfile
 ```bash
-sudo nano /etc/caddy/Caddyfile
+mkdir -p caddy
+cd caddy
+sudo nano /Caddyfile
 ```
-Add the following configuration:
+Add the following configuration which **requires modification** on replacing `/home/ben/generic-react-app` with the actual path to your project directory. Also replace `192.168.1.100` with the actual IP address of your server if you want to access it via IP. Keep `localhost` for local development.:
 
 ```bash
 localhost {
-    tls /etc/caddy/certs/selfsigned.crt /etc/caddy/certs/selfsigned.key
+    tls /home/ben/generic-react-app/certs/selfsigned.crt /home/ben/generic-react-app/certs/selfsigned.key
 
     reverse_proxy /api/* http://localhost:8080
     reverse_proxy / http://localhost:3000
 }
 
 192.168.1.100 {
-    tls /etc/caddy/certs/selfsigned.crt /etc/caddy/certs/selfsigned.key
+    tls /home/ben/generic-react-app/certs/selfsigned.crt /home/ben/generic-react-app/certs/selfsigned.key
 
     reverse_proxy /api/* http://192.168.1.100:8080
     reverse_proxy / http://192.168.1.100:3000
 }
 
 ```
-Replace `192.168.1.100` with the actual IP address of your server if you want to access it via IP. Keep `localhost` for local development.
+
 
 Explanation
 * `localhost`: This block allows you to access your application via https://localhost.
 * `192.168.1.100`: This block allows you to access your application via the specified IP address (192.168.1.100 in this case). Adjust this IP to match your actual server's IP.
 
-Starting and Enabling Caddy
+## Run app from Caddy:
+
 ```bash
-sudo systemctl start caddy
+start_all.sh
 ```
 
-Enable Caddy to Start on Boot:
+## Stop app:
+
 ```bash
-sudo systemctl enable caddy
+stop_all.sh
 ```
 
-Check Caddy status:
+Troubleshooting Caddy if app needs to be restarted or not working:
 ```bash
-sudo systemctl status caddy
+sudo caddy stop
+ps aux | grep caddy
+sudo pkill caddy
+ps aux | grep caddy
+```
+Restart
+```bash
+sudo caddy stop
+sudo caddy start --config /home/ben/generic-react-app/caddy/Caddyfile
 ```
 
-Check Caddy logs for any errors:
-```bash
-sudo journalctl -u caddy
-```
+
