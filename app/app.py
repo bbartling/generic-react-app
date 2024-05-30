@@ -38,7 +38,6 @@ async def login(request):
         logging.debug(f"Login failed: {username}")
         return web.json_response({"status": "failure", "message": "Invalid credentials"}, status=401)
 
-
 async def create_user(request):
     auth_header = request.headers.get("Authorization")
     if not auth_header:
@@ -133,6 +132,12 @@ async def get_dashboard(request):
 
     return web.json_response({"status": "success", "data": data})
 
+# Serve static files from the frontend build directory
+async def index(request):
+    return web.FileResponse('./frontend/my-app/build/index.html')
+
+async def static(request):
+    return web.FileResponse(f'./frontend/my-app/build{request.match_info["filename"]}')
 
 app = web.Application()
 cors = aiohttp_cors.setup(app, defaults={
@@ -148,6 +153,8 @@ cors.add(app.router.add_post("/create_user", create_user))
 cors.add(app.router.add_get("/get_users", get_users))
 cors.add(app.router.add_post("/delete_user", delete_user))
 cors.add(app.router.add_get("/dashboard", get_dashboard))
+app.router.add_get('/', index)
+app.router.add_get('/{filename:.*}', static)
 
 if __name__ == "__main__":
-    web.run_app(app, host="localhost", port=8080)
+    web.run_app(app, host="0.0.0.0", port=8000)
