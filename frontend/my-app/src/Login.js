@@ -30,9 +30,11 @@ const Login = () => {
         } catch (error) {
             console.error("Error during login:", error);
 
-            if (error.response && error.response.status === 401) {
-                setMessage('Bad username or password');
+            if (error.response) {
+                // Display the message from the server if available
+                setMessage(error.response.data.message || 'An error occurred. Please try again later.');
             } else {
+                // Handle more general application errors
                 setMessage('An error occurred. Please try again later.');
             }
         }

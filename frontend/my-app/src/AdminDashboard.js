@@ -26,7 +26,7 @@ const AdminDashboard = () => {
                 if (error.response && error.response.data) {
                     setMessage(error.response.data.message);
                 } else {
-                    setMessage('An error occurred');
+                    setMessage('An error occurred. Please try again later.');
                 }
             }
         };
@@ -38,10 +38,6 @@ const AdminDashboard = () => {
         localStorage.removeItem('token');
         navigate('/');
     };
-
-    // Log the state of data and message
-    console.log('Data:', data);
-    console.log('Message:', message);
 
     return (
         <div className="container">

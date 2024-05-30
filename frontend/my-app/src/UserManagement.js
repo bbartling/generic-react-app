@@ -27,7 +27,7 @@ const UserManagement = () => {
                 if (error.response && error.response.data) {
                     setMessage(error.response.data.message);
                 } else {
-                    setMessage('An error occurred');
+                    setMessage('An error occurred. Please try again later.');
                 }
             }
         };
@@ -44,7 +44,7 @@ const UserManagement = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/create_user', {
+            const response = await axios.post('/create_user', {
                 username,
                 password,
             }, {
@@ -60,7 +60,7 @@ const UserManagement = () => {
             if (error.response && error.response.data) {
                 setMessage(error.response.data.message);
             } else {
-                setMessage('An error occurred');
+                setMessage('An error occurred. Please try again later.');
             }
         }
     };
@@ -73,7 +73,7 @@ const UserManagement = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8080/delete_user', { username }, {
+            const response = await axios.post('/delete_user', { username }, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setMessage(response.data.message);
@@ -84,7 +84,7 @@ const UserManagement = () => {
             if (error.response && error.response.data) {
                 setMessage(error.response.data.message);
             } else {
-                setMessage('An error occurred');
+                setMessage('An error occurred. Please try again later.');
             }
         }
     };
