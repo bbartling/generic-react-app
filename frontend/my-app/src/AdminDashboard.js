@@ -17,7 +17,7 @@ const AdminDashboard = () => {
             }
 
             try {
-                const response = await axios.get('http://localhost:8080/dashboard', {
+                const response = await axios.get('/dashboard', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 console.log('Data received:', response.data.data); // Log received data

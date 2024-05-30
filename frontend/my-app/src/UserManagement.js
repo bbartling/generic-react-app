@@ -19,7 +19,7 @@ const UserManagement = () => {
             }
 
             try {
-                const response = await axios.get('http://localhost:8080/get_users', {
+                const response = await axios.get('/get_users', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUsers(response.data.users);

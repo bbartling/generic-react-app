@@ -28,9 +28,21 @@ generic-react-app/
 └── Dockerfile
 ```
 
-## Rebuild and Restart Containers
+## Edit .env file for custom passwords, etc..
+```bash
+ADMIN_USERNAME=me
+ADMIN_PASSWORD=1234
+JWT_SECRET_KEY=super_secret_jwt_key
+```
+
+## Remove Containers
 ```bash
 docker-compose down
+```
+
+## Rebuild and Restart Containers
+```bash
 docker-compose build
 docker-compose up
 ```
+

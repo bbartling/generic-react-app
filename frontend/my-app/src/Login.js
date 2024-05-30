@@ -13,7 +13,7 @@ const Login = () => {
         e.preventDefault();
         try {
             console.log("Submitting login form with:", { username, password });
-            const response = await axios.post('http://localhost:8080/login', { username, password });
+            const response = await axios.post('/login', { username, password }); // Use relative path
             console.log("Login response:", response.data);
 
             if (response.data.status === 'success') {
@@ -30,11 +30,9 @@ const Login = () => {
         } catch (error) {
             console.error("Error during login:", error);
 
-            // Check if the error is a server response indicating bad credentials
             if (error.response && error.response.status === 401) {
                 setMessage('Bad username or password');
             } else {
-                // Handle more general application errors
                 setMessage('An error occurred. Please try again later.');
             }
         }
