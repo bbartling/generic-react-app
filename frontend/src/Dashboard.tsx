@@ -3,9 +3,19 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 
-const Dashboard = () => {
-    const [data, setData] = useState({});
-    const [message, setMessage] = useState('');
+interface Financials {
+    revenue: number;
+    expenses: number;
+    net_profit: number;
+}
+
+interface Data {
+    financials?: Financials;
+}
+
+const Dashboard: React.FC = () => {
+    const [data, setData] = useState<Data>({});
+    const [message, setMessage] = useState<string>('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,10 +30,11 @@ const Dashboard = () => {
                 const response = await axios.get('/dashboard', { 
                     headers: { Authorization: `Bearer ${token}` } 
                 });
-                console.log('Data received:', response.data.data); // Log received data
+                console.log('Data received:', response.data.data);
                 setData(response.data.data);
             } catch (error) {
-                if (error.response && error.response.data) {
+                console.error("Error fetching data:", error);
+                if (axios.isAxiosError(error) && error.response) {
                     setMessage(error.response.data.message);
                 } else {
                     setMessage('An error occurred. Please try again later.');

@@ -3,11 +3,15 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './App.css';
 
-const UserManagement = () => {
-    const [users, setUsers] = useState([]);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+interface User {
+    username: string;
+}
+
+const UserManagement: React.FC = () => {
+    const [users, setUsers] = useState<User[]>([]);
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,7 +28,7 @@ const UserManagement = () => {
                 });
                 setUsers(response.data.users);
             } catch (error) {
-                if (error.response && error.response.data) {
+                if (axios.isAxiosError(error) && error.response) {
                     setMessage(error.response.data.message);
                 } else {
                     setMessage('An error occurred. Please try again later.');
@@ -35,7 +39,7 @@ const UserManagement = () => {
         fetchUsers();
     }, []);
 
-    const handleCreateUser = async (e) => {
+    const handleCreateUser = async (e: React.FormEvent) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
         if (!token) {
@@ -57,7 +61,7 @@ const UserManagement = () => {
                 setPassword('');
             }
         } catch (error) {
-            if (error.response && error.response.data) {
+            if (axios.isAxiosError(error) && error.response) {
                 setMessage(error.response.data.message);
             } else {
                 setMessage('An error occurred. Please try again later.');
@@ -65,7 +69,7 @@ const UserManagement = () => {
         }
     };
 
-    const handleDeleteUser = async (username) => {
+    const handleDeleteUser = async (username: string) => {
         const token = localStorage.getItem('token');
         if (!token) {
             setMessage('No token found');
@@ -81,7 +85,7 @@ const UserManagement = () => {
                 setUsers(users.filter(user => user.username !== username));
             }
         } catch (error) {
-            if (error.response && error.response.data) {
+            if (axios.isAxiosError(error) && error.response) {
                 setMessage(error.response.data.message);
             } else {
                 setMessage('An error occurred. Please try again later.');

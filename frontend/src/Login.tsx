@@ -3,13 +3,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './App.css';
 
-const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+const Login: React.FC = () => {
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             console.log("Submitting login form with:", { username, password });
@@ -30,7 +30,7 @@ const Login = () => {
         } catch (error) {
             console.error("Error during login:", error);
 
-            if (error.response) {
+            if (axios.isAxiosError(error) && error.response) {
                 // Display the message from the server if available
                 setMessage(error.response.data.message || 'An error occurred. Please try again later.');
             } else {

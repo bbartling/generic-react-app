@@ -3,9 +3,14 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import './App.css';
 
-const AdminDashboard = () => {
-    const [data, setData] = useState({});
-    const [message, setMessage] = useState('');
+interface Data {
+    total_users?: number;
+    system_status?: string;
+}
+
+const AdminDashboard: React.FC = () => {
+    const [data, setData] = useState<Data>({});
+    const [message, setMessage] = useState<string>('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,10 +25,11 @@ const AdminDashboard = () => {
                 const response = await axios.get('/dashboard', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                console.log('Data received:', response.data.data); // Log received data
+                console.log('Data received:', response.data.data);
                 setData(response.data.data);
             } catch (error) {
-                if (error.response && error.response.data) {
+                console.error("Error fetching data:", error);
+                if (axios.isAxiosError(error) && error.response) {
                     setMessage(error.response.data.message);
                 } else {
                     setMessage('An error occurred. Please try again later.');

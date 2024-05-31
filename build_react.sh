@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define frontend directory
-FRONTEND_DIR=~/generic-react-app/frontend/my-app
+FRONTEND_DIR=~/generic-react-app/frontend
 
 # Function to handle errors
 handle_error() {

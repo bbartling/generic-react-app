@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 import AdminDashboard from './AdminDashboard';
 import UserManagement from './UserManagement';
 
-const App = () => {
+const App: React.FC = () => {
     return (
         <Router>
             <Routes>

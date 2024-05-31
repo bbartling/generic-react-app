@@ -1,6 +1,14 @@
 # generic-react-app
-generic react app for Pen Testing with JWT login. 
+generic react Typescript based app to make into other things. 
 
+## Bootstrap tsx react project
+```bash
+npx create-react-app frontend --template typescript
+
+npm install axios react-router-dom
+npm install --save-dev @types/axios @types/react-router-dom
+
+```
 ## Build the react app for production
 ```bash
 build_react.sh
