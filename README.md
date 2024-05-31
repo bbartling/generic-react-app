@@ -1,5 +1,5 @@
 # generic-react-app
-generic react Typescript based app to make into other things. 
+generic react Typescript app to make into other things. Has a login screen and JWT type authentication.
 
 ## Make sure Docker and Dockercompose are setup
 ```bash
