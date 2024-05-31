@@ -1,7 +1,13 @@
 # generic-react-app
 generic react Typescript based app to make into other things. 
 
-## Bootstrap tsx react project
+## Make sure Docker and Dockercompose are setup
+```bash
+docker --version
+docker-compose --version
+```
+
+## (skip) Notes to bootstrap tsx react project with a dir named `frontend`
 ```bash
 npx create-react-app frontend --template typescript
 
@@ -10,8 +16,16 @@ npm install --save-dev @types/axios @types/react-router-dom
 
 ```
 ## Build the react app for production
+
+If on linux run bash script
 ```bash
 build_react.sh
+```
+
+else on Windows to build react projects
+```bash
+cd frontend
+npm run build
 ```
 
 ## Make certs
