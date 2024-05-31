@@ -147,10 +147,6 @@ cython_debug/
 # PyCharm
 # .idea/
 
-# Docker
-docker-compose.yml
-Dockerfile
-
 # React build
 frontend/my-app/build/
 

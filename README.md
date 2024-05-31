@@ -26,14 +26,18 @@ generic-react-app/
 │   ├── app.py
 │   └── requirements.txt
 ├── frontend/
-│   └── my-app
-│        └── build (react)
+│   └── build (Typescript React)
 ├── nginx/
 │   ├── default.conf
 │   └── self-signed.crt
 │   └── self-signed.key
 ├── docker-compose.yml
 └── Dockerfile
+```
+
+## Add .env for jwt and admin username and password
+```bash
+touch .env
 ```
 
 ## Edit .env file for custom passwords, etc..

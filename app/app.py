@@ -134,10 +134,10 @@ async def get_dashboard(request):
 
 # Serve static files from the frontend build directory
 async def index(request):
-    return web.FileResponse('./frontend/my-app/build/index.html')
+    return web.FileResponse('./frontend/build/index.html')
 
 async def static(request):
-    return web.FileResponse(f'./frontend/my-app/build{request.match_info["filename"]}')
+    return web.FileResponse(f'./frontend/build{request.match_info["filename"]}')
 
 app = web.Application()
 cors = aiohttp_cors.setup(app, defaults={
