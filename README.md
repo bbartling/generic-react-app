@@ -1,5 +1,5 @@
 # generic-react-app
-generic react Typescript app to make into other things. Has a login screen and JWT type authentication.
+Generic react Typescript app to make into other things. Uses Docker, self signed certs for tls with ngnix, and a login screen and JWT type authentication.
 
 ## Make sure Docker and Dockercompose are setup
 ```bash
@@ -8,6 +8,7 @@ docker-compose --version
 ```
 
 ## (skip) Notes to bootstrap tsx react project with a dir named `frontend`
+This is only notes to do this again if needed on another future project but `skip` otherwise.
 ```bash
 npx create-react-app frontend --template typescript
 
@@ -28,7 +29,7 @@ cd frontend
 npm run build
 ```
 
-## Make certs
+## Make self signed certs
 ```bash
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx/self-signed.key -out nginx/self-signed.crt
 ```
