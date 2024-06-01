@@ -2,6 +2,7 @@
 Generic react Typescript app to make into other things. Uses Docker, self signed certs for tls with ngnix, and a login screen and JWT type authentication.
 
 ## Make sure Docker and Dockercompose are setup
+Also assuming Python and npm are installed previously...
 ```bash
 docker --version
 docker-compose --version
