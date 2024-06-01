@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 
 interface User {
@@ -93,6 +93,14 @@ const UserManagement: React.FC = () => {
         }
     };
 
+    const handleBackToAdminDashboard = () => {
+        navigate('/admin-dashboard');
+    };
+
+    const handleViewBusinessData = () => {
+        navigate('/dashboard');
+    };
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/');
@@ -118,22 +126,20 @@ const UserManagement: React.FC = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit">Create User</button>
+                <button type="submit" className="button">Create User</button>
             </form>
-            {message && <p className="result">{message}</p>}
+            {message && <p className="result alert-danger">{message}</p>}
             <h3>Existing Users</h3>
             <ul>
                 {users.map((user) => (
                     <li key={user.username}>
-                        {user.username} <button onClick={() => handleDeleteUser(user.username)}>Delete</button>
+                        {user.username} <button className="button delete" onClick={() => handleDeleteUser(user.username)}>Delete</button>
                     </li>
                 ))}
             </ul>
-            <Link to="/admin-dashboard">Back to Admin Dashboard</Link>
-            <br />
-            <Link to="/dashboard">View Business Data</Link>
-            <br />
-            <button onClick={handleLogout}>Logout</button>
+            <button className="button" onClick={handleBackToAdminDashboard}>Back to Admin Dashboard</button>
+            <button className="button" onClick={handleViewBusinessData}>View Business Data</button>
+            <button className="button logout" onClick={handleLogout}>Logout</button>
         </div>
     );
 };

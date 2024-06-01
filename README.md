@@ -1,5 +1,5 @@
 # generic-react-app
-Generic react Typescript app to make into other things. Uses Docker, self signed certs for tls with ngnix, and a login screen and JWT type authentication.
+Generic react Typescript app with a Python aiohttp backend to make into other things. Uses Docker, self signed certs for tls with ngnix, and a login screen and JWT type authentication.
 
 ## Make sure Docker and Dockercompose are setup
 Also assuming Python and npm are installed previously...
@@ -14,6 +14,8 @@ This is only notes to do this again if needed on another future project but `ski
 npx create-react-app frontend --template typescript
 
 npm install axios react-router-dom
+npm install react-bootstrap bootstrap
+
 npm install --save-dev @types/axios @types/react-router-dom
 
 ```

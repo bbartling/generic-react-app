@@ -27,8 +27,8 @@ const Dashboard: React.FC = () => {
             }
 
             try {
-                const response = await axios.get('/dashboard', { 
-                    headers: { Authorization: `Bearer ${token}` } 
+                const response = await axios.get('/dashboard', {
+                    headers: { Authorization: `Bearer ${token}` },
                 });
                 console.log('Data received:', response.data.data);
                 setData(response.data.data);
@@ -52,17 +52,21 @@ const Dashboard: React.FC = () => {
 
     return (
         <div className="container">
-            <h2>Super Secret Dashboard</h2>
-            {message && <p className="result">{message}</p>}
-            {!message && data.financials && (
-                <div>
-                    <h3>Financials</h3>
-                    <p>Revenue: {data.financials.revenue}</p>
-                    <p>Expenses: {data.financials.expenses}</p>
-                    <p>Net Profit: {data.financials.net_profit}</p>
+            <div className="card">
+                <h2>Business Dashboard</h2>
+                <div className="navbar">
+                    <button className="button logout" onClick={handleLogout}>Logout</button>
                 </div>
-            )}
-            <button onClick={handleLogout}>Logout</button>
+                {message && <p className="result alert-danger">{message}</p>}
+                {!message && data.financials && (
+                    <div>
+                        <h3>Financials</h3>
+                        <p>Revenue: {data.financials.revenue}</p>
+                        <p>Expenses: {data.financials.expenses}</p>
+                        <p>Net Profit: {data.financials.net_profit}</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

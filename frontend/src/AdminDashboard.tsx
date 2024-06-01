@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 
 interface Data {
@@ -45,20 +45,34 @@ const AdminDashboard: React.FC = () => {
         navigate('/');
     };
 
+    const handleViewBusinessData = () => {
+        navigate('/dashboard');
+    };
+
+    const handleManageUsers = () => {
+        navigate('/user-management');
+    };
+
     return (
         <div className="container">
             <h2>Admin Dashboard</h2>
-            {message && <p className="result">{message}</p>}
+            {message && <p className="result alert-danger">{message}</p>}
             {!message && (
                 <div>
-                    <h3>System Status</h3>
-                    <p>Total Users: {data.total_users}</p>
-                    <p>System Status: {data.system_status}</p>
-                    <Link to="/user-management">Manage Users</Link>
-                    <br />
-                    <Link to="/dashboard">View Business Data</Link>
-                    <br />
-                    <button onClick={handleLogout}>Logout</button>
+                    <div className="card">
+                        <h3>System Status</h3>
+                        <p>Total Users: {data.total_users}</p>
+                        <p>System Status: {data.system_status}</p>
+                    </div>
+                    <div className="card">
+                        <button className="button" onClick={handleViewBusinessData}>
+                            View Business Data
+                        </button>
+                        <button className="button" onClick={handleManageUsers}>
+                            Manage Users
+                        </button>
+                    </div>
+                    <button className="button logout" onClick={handleLogout}>Logout</button>
                 </div>
             )}
         </div>
