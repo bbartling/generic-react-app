@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define frontend directory
-FRONTEND_DIR=~/generic-react-app/frontend
+FRONTEND_DIR=~/Desktop/generic-react-app/frontend
 
 # Function to handle errors
 handle_error() {
@@ -18,7 +18,7 @@ npm ci || handle_error "npm ci"
 echo "npm install successfully."
 
 # Set the NODE_OPTIONS environment variable to use less memory
-# This is the only way i can get to work on rasp pi
+# This is the only way I can get it to work on Raspberry Pi
 # export NODE_OPTIONS="--max-old-space-size=256"
 
 # Build the React app

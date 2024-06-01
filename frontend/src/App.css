@@ -172,6 +172,7 @@ button:hover {
 
 .button.delete {
   background: linear-gradient(45deg, #ffc107, #e0a800);
+  width: 20%;
 }
 
 .button.delete:hover {

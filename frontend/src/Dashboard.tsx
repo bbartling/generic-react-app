@@ -54,9 +54,6 @@ const Dashboard: React.FC = () => {
         <div className="container">
             <div className="card">
                 <h2>Business Dashboard</h2>
-                <div className="navbar">
-                    <button className="button logout" onClick={handleLogout}>Logout</button>
-                </div>
                 {message && <p className="result alert-danger">{message}</p>}
                 {!message && data.financials && (
                     <div>
@@ -66,6 +63,9 @@ const Dashboard: React.FC = () => {
                         <p>Net Profit: {data.financials.net_profit}</p>
                     </div>
                 )}
+                <div className="navbar">
+                    <button className="button logout" onClick={handleLogout}>Logout</button>
+                </div>
             </div>
         </div>
     );
