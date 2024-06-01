@@ -5,8 +5,9 @@ Generic react Typescript app with a Python aiohttp backend to make into other th
 ```
 generic-react-app/
 ├── app/
-│   ├── app.py
-│   └── requirements.txt
+│   ├── app.py 
+│   ├── login_utils.py
+│   └── requirements.txt 
 ├── frontend/
 │   └── build (Typescript React)
 ├── nginx/
